@@ -37,4 +37,5 @@ resttemplate和@Feign不能共存，因为这个问题，导致浪费2小时
 * zipkin目前是把数据放在mem当中，需要调研rabbit mq存储数据。
 * spring cloud stream也要研究一下
 * 性能测试需要关注
-
+* admin 增加邮件支持
+* admin 监控增加ssl支持
