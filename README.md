@@ -41,4 +41,4 @@ resttemplate和@Feign不能共存，因为这个问题，导致浪费2小时
 * admin 监控增加ssl支持
 * zuul API 网关，作安全攻防用，参数修改使用
 * 日志系统集成
-* mysql 日志监控
+* mysql 日志监控：mybatis + logback
