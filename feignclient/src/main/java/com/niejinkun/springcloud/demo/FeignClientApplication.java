@@ -1,5 +1,7 @@
 package com.niejinkun.springcloud.demo;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -28,12 +30,18 @@ public class FeignClientApplication {
 
 @RestController
 class InvokeController implements UserServiceClient{
+    Logger logger = LoggerFactory.getLogger("feignclient");
+
     @Autowired
     private  UserServiceClient userServiceClient;
 
     @RequestMapping("/users2")
     public List<User> getUsers() {
-        return userServiceClient.getUsers();
+        List<User> users = userServiceClient.getUsers();
+
+        logger.info("users : {}",users.toString() );
+
+        return  users;
     }
 }
 

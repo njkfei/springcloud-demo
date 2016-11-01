@@ -4,6 +4,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import org.apache.commons.io.IOUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -13,6 +15,7 @@ import java.io.Serializable;
  * Created by niejinping on 2016/11/1.
  */
 public class ResponseFilter extends ZuulFilter {
+    Logger logger = LoggerFactory.getLogger("zuul");
     @Override
     public String filterType() {
         return "post";
@@ -36,6 +39,8 @@ public class ResponseFilter extends ZuulFilter {
 
         try {
             String data = IOUtils.toString(inputStream, "UTF-8");
+
+            logger.info(data);
 
             MessageVo vo = new MessageVo("test","200",data);
 
