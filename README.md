@@ -14,6 +14,63 @@ springcloud demo。包括如下组件：
 * 配置中心的配置文件，保存在另外一个git仓库中,地址是!(https://github.com/njkfei/springcloud-config-repo)[https://github.com/njkfei/springcloud-config-repo]
 * 本demo运行成功
 * 本demo运行成功，还是挺麻烦的，需要一点运气
+* 没有父POM.xml，个人不太喜欢这种父POM.XML的方式
+* hystrixdashboard启动成功，但没有做功能性测试
+
+## 启动方法
+进入每个工程，有两种方式
+### mvn spring-boot:run
+在pom.xml目前下，运行下面的命令即可。
+```
+mvn spring-boot:run
+```
+### java -jar xxx.jar
+在pom.xml目录下，生成jar包
+```
+mvn clean install -Dmaven.test.skip=true
+cd target
+java -jar xxx.jar
+```
+
+## 启动顺序
+1. configuration-service
+1. eureka-service
+1. admin
+1. hystrixdashboard
+1. zipkinservice
+1. userservice
+1. feignclient
+1. serviceclient
+1. zuulapigateway
+
+```
+cd configuration-service
+mvn spring-boot:run
+
+cd eureka-service
+mvn spring-boot:run
+
+cd admin
+mvn spring-boot:run
+
+cd hystrixdashboard
+mvn spring-boot:run
+
+cd zipkinservice
+mvn spring-boot:run
+
+cd userservice
+mvn spring-boot:run
+
+cd feignclient
+mvn spring-boot:run
+
+cd serviceclient
+mvn spring-boot:run
+
+cd zuulapigateway
+mvn spring-boot:run
+```
 
 ## 坑
 ### @Feign报错
