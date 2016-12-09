@@ -32,6 +32,35 @@ cd target
 java -jar xxx.jar
 ```
 
+```
+cd configuration-service
+mvn clean install -Dmaven.test.skip=true
+
+cd ../eureka-service
+mvn clean install -Dmaven.test.skip=true
+
+cd ../admin
+mvn clean install -Dmaven.test.skip=true
+
+cd ../hystrixdashboard
+mvn clean install -Dmaven.test.skip=true
+
+cd ../zipkinservice
+mvn clean install -Dmaven.test.skip=true
+
+cd ../userservice
+mvn clean install -Dmaven.test.skip=true
+
+cd ../feignclient
+mvn clean install -Dmaven.test.skip=true
+
+cd ../serviceclient
+mvn clean install -Dmaven.test.skip=true
+
+cd ../zuulapigateway
+mvn clean install -Dmaven.test.skip=true
+```
+
 ## 启动顺序
 1. configuration-service
 1. eureka-service
@@ -45,31 +74,31 @@ java -jar xxx.jar
 
 ```
 cd configuration-service
-mvn spring-boot:run
+mvn spring-boot:run &
 
-cd eureka-service
-mvn spring-boot:run
+cd ../eureka-service
+mvn spring-boot:run &
 
-cd admin
-mvn spring-boot:run
+cd ../admin
+mvn spring-boot:run &
 
-cd hystrixdashboard
-mvn spring-boot:run
+cd ../hystrixdashboard
+mvn spring-boot:run &
 
-cd zipkinservice
-mvn spring-boot:run
+cd ../zipkinservice
+mvn spring-boot:run &
 
-cd userservice
-mvn spring-boot:run
+cd ../userservice
+mvn spring-boot:run &
 
-cd feignclient
-mvn spring-boot:run
+cd ../feignclient
+mvn spring-boot:run &
 
-cd serviceclient
-mvn spring-boot:run
+cd ../serviceclient
+mvn spring-boot:run &
 
-cd zuulapigateway
-mvn spring-boot:run
+cd ../zuulapigateway
+mvn spring-boot:run &
 ```
 
 ## 坑
