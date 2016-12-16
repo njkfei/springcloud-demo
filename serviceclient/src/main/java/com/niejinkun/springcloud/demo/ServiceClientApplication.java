@@ -10,7 +10,9 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
@@ -48,6 +50,15 @@ class InvokeController{
 
 	public List<User> fallback(){
 		return new ArrayList<>();
+	}
+
+	public int addfallback(){return 0;}
+
+	@RequestMapping(value = "/user",method = RequestMethod.POST)
+	@HystrixCommand(fallbackMethod = "addfallback")
+	int addUser(@RequestBody User user){
+		restTemplate.postForObject("http://user-service/user/add",user,User.class);
+		return 1;
 	}
 
 	@RequestMapping("/users")

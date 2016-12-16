@@ -5,7 +5,9 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.Serializable;
@@ -27,14 +29,23 @@ public class UserServiceApplication {
 @RestController
 @RequestMapping("/user")
 class UserController{
+	List<User> users = new ArrayList<>();
+	{
+		users.add(new User(1,"hekk"));
+		users.add(new User(2,"world"));
+	}
 
 	@RequestMapping("/list")
 	List<User> getusers(){
-		List<User> users = new ArrayList<>();
-		users.add(new User(1,"hekk"));
-		users.add(new User(2,"world"));
 
 		return users;
+	}
+
+	@RequestMapping(value = "/add",method = RequestMethod.POST)
+	int addUser(@RequestBody User user){
+		users.add(user);
+
+		return users.size();
 	}
 
 }

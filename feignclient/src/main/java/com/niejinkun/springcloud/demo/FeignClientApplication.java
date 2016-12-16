@@ -9,6 +9,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.netflix.feign.EnableFeignClients;
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -43,6 +44,11 @@ class InvokeController implements UserServiceClient{
 
         return  users;
     }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/user/add")
+    public int addUser(@RequestBody  User user) {
+        return userServiceClient.addUser(user);
+    }
 }
 
 
@@ -51,6 +57,9 @@ class InvokeController implements UserServiceClient{
 interface UserServiceClient {
 	@RequestMapping(method = RequestMethod.GET, value = "/user/list")
 	List<User> getUsers();
+
+    @RequestMapping(method = RequestMethod.POST, value = "/user/add",consumes = "application/json")
+    int addUser(  User user);
 }
 
 @Component
@@ -59,6 +68,11 @@ interface UserServiceClient {
     @Override
     public List<User> getUsers() {
         return new ArrayList<>();
+    }
+
+    @Override
+    public int addUser(User user) {
+        return 0;
     }
 }
 
